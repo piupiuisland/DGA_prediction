@@ -1,6 +1,6 @@
 """Generates data for train/test algorithms"""
 from datetime import datetime
-from io import StringIO
+from io import StringIO, BytesIO
 from urllib.request import urlopen
 from zipfile import ZipFile
 
@@ -21,9 +21,15 @@ DATA_FILE = 'traindata.pkl'
 def get_alexa(num, address=ALEXA_1M, filename='top-1m.csv'):
     """Grabs Alexa 1M"""
     url = urlopen(address)
-    zipfile = ZipFile(StringIO(url.read()))
-    return [tldextract.extract(x.split(',')[1]).domain for x in \
+    # zipfile = ZipFile(StringIO(url.read()))
+    # url = urlopen(address)
+    zipfile = ZipFile(BytesIO(url.read()))
+
+    generated_list = [tldextract.extract(x.decode('utf-8').split(',')[1]).domain for x in \
             zipfile.read(filename).split()[:num]]
+
+    generated_label = ['benign'] * len(generated_list)
+    return generated_list, generated_label
 
 def gen_malicious(num_per_dga=10000):
     """Generates num_per_dga of each DGA"""
@@ -63,7 +69,7 @@ def gen_malicious(num_per_dga=10000):
         domains += banjori.generate_domains(segs_size, banjori_seed)
         labels += ['banjori']*segs_size
 
-    print('num_per_dga',num_per_dga)
+    # print('num_per_dga',num_per_dga)
     domains += corebot.generate_domains(num_per_dga)
     labels += ['corebot']*num_per_dga
 
@@ -84,6 +90,7 @@ def gen_malicious(num_per_dga=10000):
 
     # generate kraken and divide between configs
     kraken_to_gen = max(1, num_per_dga/2)
+    kraken_to_gen = int(kraken_to_gen)
     domains += kraken.generate_domains(kraken_to_gen, datetime(2016, 1, 1), 'a', 3)
     labels += ['kraken']*kraken_to_gen
     domains += kraken.generate_domains(kraken_to_gen, datetime(2016, 1, 1), 'b', 3)
@@ -91,6 +98,7 @@ def gen_malicious(num_per_dga=10000):
 
     # generate locky and divide between configs
     locky_gen = max(1, num_per_dga/11)
+    locky_gen  =  int(locky_gen)
     for i in range(1, 12):
         domains += lockyv2.generate_domains(locky_gen, config=i)
         labels += ['locky']*locky_gen
@@ -106,6 +114,7 @@ def gen_malicious(num_per_dga=10000):
     # ramdo divided over different lengths
     ramdo_lengths = range(8, 32)
     segs_size = max(1, num_per_dga/len(ramdo_lengths))
+    segs_size = int(segs_size)
     for rammdo_length in ramdo_lengths:
         domains += ramdo.generate_domains(segs_size,
                                           seed_num=random.randint(1, 1000000),
@@ -119,6 +128,7 @@ def gen_malicious(num_per_dga=10000):
     # simda
     simda_lengths = range(8, 32)
     segs_size = max(1, num_per_dga/len(simda_lengths))
+    segs_size = int(segs_size)
     for simda_length in range(len(simda_lengths)):
         domains += simda.generate_domains(segs_size,
                                           length=simda_length,
@@ -137,20 +147,29 @@ def gen_data(force=False):
     """
     if force or (not os.path.isfile(DATA_FILE)):
         domains, labels = gen_malicious(10000)
-
+        print('num of domain data and label:  ', len(domains), len(labels))
         # Get equal number of benign/malicious
-        domains += get_alexa(len(domains))
-        labels += ['benign']*len(domains)
 
-        pickle.dump(zip(labels, domains), open(DATA_FILE, 'w'))
+        alexa_data, alexa_label = get_alexa(len(domains))
+        domains += alexa_data
+        labels  += alexa_label
+        data_and_label = list(zip(labels, domains))
+        print('gen_data finished :)')
+        pickle.dump(data_and_label, open(DATA_FILE, 'wb'))
 
 def get_data(force=False):
     """Returns data and labels"""
     gen_data(force)
 
-    return pickle.load(open(DATA_FILE))
+    return pickle.load(open(DATA_FILE,'rb'))
 
 
 
 if __name__ ==  '__main__':
-    domains, labels = gen_malicious(10000)
+    # domains, labels = gen_malicious(10000)
+    # assert (len(domains) == len(labels)), print('get different amount of data and labels')
+
+    indata = get_data()
+
+    print('DGA load finished')
+    print('DGA load finished')

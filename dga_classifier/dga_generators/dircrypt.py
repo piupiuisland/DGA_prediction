@@ -7,8 +7,12 @@ class RandInt:
         self.seed = seed
 
     def rand_int_modulus(self, modulus):
-        ix = self.seed                
-        ix = 16807*(ix % 127773) - 2836*(ix / 127773) & 0xFFFFFFFF        
+        ix = self.seed
+        # print(ix)
+        new_ix = (16807*(ix % 127773) - 2836*(ix / 127773))
+
+        ix = int(16807*(ix % 127773) - 2836*(ix / 127773)) & 0xFFFFFFFF
+
         self.seed = ix
         return ix % modulus 
 
@@ -16,7 +20,7 @@ def generate_domains(nr, seed="1DBA8930", tld=''):
     r = RandInt(int(seed, 16))
 
     ret = []
-    print('dircrypy, number: ',  nr)
+    # print('dircrypy, number: ',  nr)
     for i in range(nr):
         domain_len = r.rand_int_modulus(12+1) + 8
         domain = ""

@@ -2,6 +2,9 @@
 from datetime import datetime
 
 def init_rand_and_chars(year, month, day, nr_b, r):
+
+    k = (r + year + ((nr_b << 16) + (month << 8) | day))
+    # print('corebot, check what is k: ', type(k) )
     r = (r + year + ((nr_b << 16) + (month << 8) | day)) & 0xFFFFFFFF
     charset = [chr(x) for x in range(ord('a'), ord('z'))] +\
             [chr(x) for x in range(ord('0'), ord('9'))]
