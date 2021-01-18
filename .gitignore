@@ -1,3 +1,7 @@
 /dga_classifier/lstm.tf.data-00000-of-00001
 /dga_classifier/lstm.tf.index
 /dga_classifier/checkpoint
+
+.idea
+*.xml
+.idea/*
