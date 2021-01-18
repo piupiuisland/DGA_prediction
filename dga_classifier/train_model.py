@@ -1,11 +1,12 @@
-from gen_Data_build_model import *
+# from gen_Data_build_model import *
 import numpy as np
+import pickle
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.python.keras import Model
 from tensorflow.python.keras.layers import LSTM, Dense, Dropout, Embedding
 from tensorflow.python.keras import callbacks as tf_cb
-
+from tensorflow.python.keras.preprocessing import sequence
 
 
 def build_model(max_features, maxlen):
