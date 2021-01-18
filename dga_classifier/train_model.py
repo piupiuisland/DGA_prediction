@@ -106,6 +106,7 @@ if __name__ == '__main__':
     print('start  training')
 
     model = lstm(features,length,Batch_Size)
+    model.summary()
     model.compile(loss='binary_crossentropy',optimizer=keras.optimizers.RMSprop(learning_rate=1e-4),metrics=['accuracy'])
     callbacks = callb(path_checkpoint='./lstm.tf')
     hist = model.fit(trn_x, trn_y,epochs=Epochs,
