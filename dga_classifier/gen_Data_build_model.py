@@ -21,7 +21,7 @@ ALEXA_1M = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip'
 # Our ourput file containg all the training data
 DATA_FILE = 'traindata.pkl'
 
-'''
+
 def get_alexa(num, address=ALEXA_1M, filename='top-1m.csv'):
     """Grabs Alexa 1M"""
     url = urlopen(address)
@@ -143,6 +143,13 @@ def gen_malicious(num_per_dga=10000):
 
     return domains, labels
 
+def shuffle_in_union(a, b):
+    rng_state = np.random.get_state()
+    np.random.shuffle(a)
+    np.random.set_state(rng_state)
+    np.random.shuffle(b)
+
+
 def gen_data(force=False):
     """Grab all data for train/test and save
 
@@ -157,6 +164,11 @@ def gen_data(force=False):
         alexa_data, alexa_label = get_alexa(len(domains))
         domains += alexa_data
         labels  += alexa_label
+
+        domains, labels = np.array(domains), np.array(labels)
+        shuffle_in_union(domains,labels)
+        domains, labels = domains.tolist(),labels.tolist()
+
         data_and_label = list(zip(labels, domains))
         print('gen_data finished :)')
         pickle.dump(data_and_label, open(DATA_FILE, 'wb'))
@@ -167,40 +179,40 @@ def get_data(force=False):
     gen_data(force)
 
     return pickle.load(open(DATA_FILE,'rb'))
-'''
+
 
 
 if __name__ ==  '__main__':
-    # domains, labels = gen_malicious(10000)
-    # assert (len(domains) == len(labels)), print('get different amount of data and labels')
+    domains, labels = gen_malicious(10000)
+    assert (len(domains) == len(labels)), print('get different amount of data and labels')
 
-    # indata = get_data()
+    indata = get_data()
 
-    gen_data =  pickle.load(open(DATA_FILE,'rb'))
-    indata = gen_data
-
-    print('DGA load finished')
-    print('DGA load finished')
-
-    X = [x[1] for x in indata]
-    labels = [x[0] for x in indata]
-
-    # Generate a dictionary of valid characters
-    valid_chars = {x:idx+1 for idx, x in enumerate(set(''.join(X)))}
-
-    max_features = len(valid_chars) + 1
-    maxlen = np.max([len(x) for x in X])
-
-    # Convert characters to int and pad
-    X = [[valid_chars[y] for y in x] for x in X]
-    X = sequence.pad_sequences(X, maxlen=maxlen)
-
-    # Convert labels to 0-1
-    y = [0 if x == 'benign' else 1 for x in labels]
-
-    print('data preprocessing finished')
-
-
-    data_and_label = list(zip(labels, domains))
-    pickle.dump(data_and_label, open('saved_data.pkl', 'wb'))
-    read_data = pickle.load(open(DATA_FILE,'rb'))
+    # gen_data =  pickle.load(open(DATA_FILE,'rb'))
+    # indata = gen_data
+    #
+    # print('DGA load finished')
+    # print('DGA load finished')
+    #
+    # X = [x[1] for x in indata]
+    # labels = [x[0] for x in indata]
+    #
+    # # Generate a dictionary of valid characters
+    # valid_chars = {x:idx+1 for idx, x in enumerate(set(''.join(X)))}
+    #
+    # max_features = len(valid_chars) + 1
+    # maxlen = np.max([len(x) for x in X])
+    #
+    # # Convert characters to int and pad
+    # X = [[valid_chars[y] for y in x] for x in X]
+    # X = sequence.pad_sequences(X, maxlen=maxlen)
+    #
+    # # Convert labels to 0-1
+    # y = [0 if x == 'benign' else 1 for x in labels]
+    #
+    # print('data preprocessing finished')
+    #
+    #
+    # data_and_label = list(zip(labels, domains))
+    # pickle.dump(data_and_label, open('saved_data.pkl', 'wb'))
+    # read_data = pickle.load(open(DATA_FILE,'rb'))
