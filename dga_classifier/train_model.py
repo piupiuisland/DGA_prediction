@@ -7,7 +7,7 @@ from tensorflow.python.keras import Model
 from tensorflow.python.keras.layers import LSTM, Dense, Dropout, Embedding
 from tensorflow.python.keras import callbacks as tf_cb
 from tensorflow.python.keras.preprocessing import sequence
-
+import os
 
 def build_model(max_features, maxlen):
     """Build LSTM model"""
@@ -73,6 +73,23 @@ def load_data(data_file):
     print('data preprocessing finished')
     return X, y, valid_char_dict
 
+def input_domain_convert(inp_domain, valid_char_dict, max_len):
+    if isinstance(inp_domain, tuple):
+        inp_domain = inp_domain[0]
+    inp_domain = [char for char in inp_domain]
+    x = [valid_char_dict[i] for i in inp_domain]
+    x = np.array(x).reshape([1,len(x)])
+    tensor = sequence.pad_sequences(x, maxlen=max_len)
+    return tensor
+
+def pred_re(inp_domain, model,valid_char_dict, max_len):
+    inp_domain_tensor = input_domain_convert(inp_domain, valid_char_dict, max_len)
+    inp_domain_tensor = inp_domain_tensor.reshape(1, max_len)
+    pred = model.predict(inp_domain_tensor, batch_size=1)
+    if pred == 1:
+        print('{} is malignant '.format(inp_domain))
+    else:
+        print('{} is benigh'.format(inp_domain))
 if __name__ == '__main__':
     tf.random.set_seed(777)
     gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -110,15 +127,37 @@ if __name__ == '__main__':
     model.summary()
     model.compile(loss='binary_crossentropy',optimizer=keras.optimizers.RMSprop(learning_rate=1e-4),metrics=['accuracy'])
     callbacks = callb(path_checkpoint='./lstm.tf')
-    hist = model.fit(trn_x, trn_y,epochs=Epochs,
-                     batch_size=Batch_Size,
-                     verbose=1, shuffle=True,
-                     validation_data=(tst_x, tst_y),
-                     callbacks=callbacks,
-                    )
 
-    # model.fit(trn_ds,epochs=Epochs,
-    #           # batch_size=Batch_Size,
-    #           verbose=1, shuffle=True,
-    #           validation_data=tst_ds,
-    #           )
+    if not os.path.exists('./lstm.tf.index'):
+        hist = model.fit(trn_x, trn_y,epochs=Epochs,
+                         batch_size=Batch_Size,
+                         verbose=1, shuffle=True,
+                         validation_data=(tst_x, tst_y),
+                         callbacks=callbacks,
+                        )
+
+        # model.fit(trn_ds,epochs=Epochs,
+        #           # batch_size=Batch_Size,
+        #           verbose=1, shuffle=True,
+        #           validation_data=tst_ds,
+        #           )
+    else:
+        model.load_weights('./lstm.tf')
+
+
+    # test1 = 'www.cyberlens.eu',
+    # test2 = 'www.qweuoiasdfgjklasdf.be',
+    # test3 = 'www.iuubcplenspiginus.nl',
+    test1 = 'cyberlens',
+    test2 = 'qweuoiasdfgjklasdf',
+    test3 = 'iuubcplenspiginus',
+    test4 = 'iuubcplenspiginuslioujlkasdfhjklasdrfupowqerjokl',
+
+    # test1 = input_domain_convert(test1,DGA_char, length)
+    # test2 = input_domain_convert(test2,DGA_char, length)
+    # test3 = input_domain_convert(test3,DGA_char, length)
+
+    pred_re(test1, model, DGA_char, length)
+    pred_re(test2, model, DGA_char, length)
+    pred_re(test3, model, DGA_char, length)
+    pred_re(test4, model, DGA_char, length)
