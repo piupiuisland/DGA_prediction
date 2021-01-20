@@ -16,4 +16,5 @@
 #### qsnatch: cannot use,  domains are to short 
 #### ramnit: 3000
 #### reconyc: 3000
+#### shiotob: 3000
 #### 
