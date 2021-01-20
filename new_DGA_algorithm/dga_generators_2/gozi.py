@@ -1,6 +1,7 @@
 from datetime import datetime
 from ctypes import c_uint
 import argparse
+import os
 
 wordlists = {'luther': (4, '.com'), 'rfc4343': (3, '.com'), 'nasa': (5, '.com')}
 
@@ -27,7 +28,9 @@ class Rand:
 
 
 def get_words(wordlist):
-    with open(wordlist, 'r') as r:
+    wordlist_path1 = os.getcwd() + '/dga_generators_2'
+    wordlist_path = os.path.join(wordlist_path1,wordlist)
+    with open(wordlist_path, 'r') as r:
         return [w.strip() for w in r if w.strip()]
 
 
@@ -53,21 +56,21 @@ def generate_gozi(date, wordlist):
                     l >>= 1
                 if len(domain) + l <= 24:
                     domain += word[:l]
-            domain += seeds[wordlist]['tld']
+            # domain += seeds[wordlist]['tld']
             yield domain
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="gozi dga")
-    parser.add_argument("-d", "--date",
-                        help="date for which to generate domains")
-    parser.add_argument("-w", "--wordlist", help="wordlist",
-                        choices=seeds.keys(), default='luther')
-    args = parser.parse_args()
-
-    d = datetime.now()
-
-    re = []
-    re += generate_gozi(d, args.wordlist)
-    # for domain in generate_gozi(d, args.wordlist):
-    print(len(re))
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description="gozi dga")
+#     parser.add_argument("-d", "--date",
+#                         help="date for which to generate domains")
+#     parser.add_argument("-w", "--wordlist", help="wordlist",
+#                         choices=seeds.keys(), default='luther')
+#     args = parser.parse_args()
+#
+#     d = datetime.now()
+#     print(args.wordlist)
+#     re = []
+#     re += generate_gozi(d, args.wordlist)
+#     # for domain in generate_gozi(d, args.wordlist):
+#     print(len(re))

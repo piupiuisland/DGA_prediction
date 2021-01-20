@@ -40,18 +40,18 @@ def generate_barzarBackdoor(date):
         yield domain
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-d", "--date", help="date used for seeding, e.g., 2021-01-1",
-        default=datetime.now().strftime('%Y-%m-%d'))
-    args = parser.parse_args()
-    d = datetime.strptime(args.date, "%Y-%m-%d")
-    print(d)
-    l = []
-    l += generate_barzarBackdoor(d)
-
-    ## here will generate 15162 samples;
-    print(len(l))
-    # for domain in generate_barzarBackdoor(d):
-    print(l[-10:])
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument(
+#         "-d", "--date", help="date used for seeding, e.g., 2021-01-1",
+#         default=datetime.now().strftime('%Y-%m-%d'))
+#     args = parser.parse_args()
+#     d = datetime.strptime(args.date, "%Y-%m-%d")
+#     print(d)
+#     l = []
+#     l += generate_barzarBackdoor(d)
+#
+#     ## here will generate 15162 samples;
+#     print(len(l))
+#     # for domain in generate_barzarBackdoor(d):
+#     print(l[-10:])

@@ -40,15 +40,15 @@ def generate_momerodwon(date, back=0):
         days -= 1
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="date when domains are generated")
-    args = parser.parse_args()
-    if args.date:
-        d = datetime.strptime(args.date, "%Y-%m-%d")
-    else:
-        d = datetime.now()
-
-    l = []
-    l += generate_momerodwon(d)
-    print(len(l))
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="date when domains are generated")
+#     args = parser.parse_args()
+#     if args.date:
+#         d = datetime.strptime(args.date, "%Y-%m-%d")
+#     else:
+#         d = datetime.now()
+#
+#     l = []
+#     l += generate_momerodwon(d)
+#     print(len(l))

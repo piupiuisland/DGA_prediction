@@ -47,28 +47,28 @@ def generate_morufet(date, key):
 
     return moru_list
 
-if __name__=="__main__":
-    # known keys:
-    # -k D6D7A4BE
-    # -k DEADC2DE
-    # -k D6D7A4B1
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="date for which to generate domains")
-    parser.add_argument("-k", "--key", help="key", default=None)
-    args = parser.parse_args()
-    if args.key:
-        key = int(args.key, 16)
-    else:
-        key = None
-    if args.date:
-        d = datetime.strptime(args.date, "%Y-%m-%d")
-    else:
-        d = datetime.now()
-    # print(d, key)
-
-
-    re_1 = generate_morufet(d, key)
-    re_2 = generate_morufet(d, key=16)
-
-    re = re_1 + re_2
-    print(len(re))
+# if __name__=="__main__":
+#     # known keys:
+#     # -k D6D7A4BE
+#     # -k DEADC2DE
+#     # -k D6D7A4B1
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="date for which to generate domains")
+#     parser.add_argument("-k", "--key", help="key", default=None)
+#     args = parser.parse_args()
+#     if args.key:
+#         key = int(args.key, 16)
+#     else:
+#         key = None
+#     if args.date:
+#         d = datetime.strptime(args.date, "%Y-%m-%d")
+#     else:
+#         d = datetime.now()
+#     # print(d, key)
+#
+#
+#     re_1 = generate_morufet(d, key)
+#     re_2 = generate_morufet(d, key=16)
+#
+#     re = re_1 + re_2
+#     print(len(re))

@@ -31,21 +31,21 @@ def generate_chinad(date):
             domain += alphanumeric[(r & 0xFF) % len(alphanumeric)]
 
         r = h_le[-4]
-        domain += TLDS[r % len(TLDS)]
+        # domain += TLDS[r % len(TLDS)]
         yield domain
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="gozi dga")
-    parser.add_argument(
-        "-d", "--date", help="date used for seeding, e.g., 2021-01-1",
-        default=datetime.now().strftime('%Y-%m-%d'))
-    args = parser.parse_args()
-
-    ## here will generate 4096 samples;
-    d = datetime.strptime(args.date, "%Y-%m-%d")
-    print(d)
-    l = []
-    l += generate_chinad(d)
-    print(len(l))
-    # for domain in generate_chinad(d):
-    #     print(domain)
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description="gozi dga")
+#     parser.add_argument(
+#         "-d", "--date", help="date used for seeding, e.g., 2021-01-1",
+#         default=datetime.now().strftime('%Y-%m-%d'))
+#     args = parser.parse_args()
+#
+#     ## here will generate 4096 samples;
+#     d = datetime.strptime(args.date, "%Y-%m-%d")
+#     print(d)
+#     l = []
+#     l += generate_chinad(d)
+#     print(len(l))
+#     # for domain in generate_chinad(d):
+#     #     print(domain)

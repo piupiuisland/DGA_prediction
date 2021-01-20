@@ -34,13 +34,13 @@ def generate_fobber(version):
         re.append(domain)
     return re
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser(description="DGA of Fobber")
-    parser.add_argument("version", choices=[1,2], type=int)
-
-    #  will generate 3000 samples
-    fobber_domain_1 = generate_fobber(1)
-    fobber_domain_2 = generate_fobber(2)
-    fobber_domain = fobber_domain_1 + fobber_domain_2
-    print(fobber_domain)
-    print(len(fobber_domain))
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser(description="DGA of Fobber")
+#     parser.add_argument("version", choices=[1,2], type=int)
+#
+#     #  will generate 3000 samples
+#     fobber_domain_1 = generate_fobber(1)
+#     fobber_domain_2 = generate_fobber(2)
+#     fobber_domain = fobber_domain_1 + fobber_domain_2
+#     print(fobber_domain)
+#     print(len(fobber_domain))
