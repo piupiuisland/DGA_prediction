@@ -12,4 +12,5 @@
 #### nerus: 3000
 #### nymaim: 3000
 #### pizd: cannot use, it  generates normal domains...
+#### baderj: 3000;    carefully consider it,
 #### 
