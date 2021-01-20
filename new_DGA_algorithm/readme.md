@@ -17,4 +17,7 @@
 #### ramnit: 3000
 #### reconyc: 3000
 #### shiotob: 3000
-#### 
+#### tempedreve: cannot  use,  only generates 130
+#### vawtrak: 3000
+#### vawtrak2: 3000
+#### zloader: 3000
