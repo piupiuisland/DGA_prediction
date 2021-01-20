@@ -11,4 +11,5 @@
 #### mydoom: cannot use, only generate 147 samples
 #### nerus: 3000
 #### nymaim: 3000
-####
+#### pizd: cannot use, it  generates normal domains...
+#### 
