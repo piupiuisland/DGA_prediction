@@ -13,4 +13,6 @@
 #### nymaim: 3000
 #### pizd: cannot use, it  generates normal domains...
 #### pushdo: 3000;    carefully consider it,
-#### qsnatch: cannot use,  domains are to short;
+#### qsnatch: cannot use,  domains are to short 
+#### ramnit: 3000
+#### 

@@ -20,10 +20,11 @@ def generate_ramnit(seed, nr, tlds):
     seed_list = ['16647BB4', 'E7392D18', 'C129388E', 'E706B455', 'DC485593',
                  'EF214BBF', '28488EEA', '4BFCBC6A', '79159C10', '92F4BE35',
                  '1CCEC41C', '0C5787AE2', '0FCFFD9E9', '75EA95C2', '8A0AEC7D', '1DF640A8',
-                 '14DF29DD', '8222270B', '55536A85', '5C39E467',
+                 '14DF29DD', '8222270B', '5C39E467',
                  'D2B3C361', 'F318D47D', '231D9480', '13317EAC', '89547381', '6C36D41D',
                  ]
     idx = random.randint(0,len(seed_list))
+    print(seed)
     r = RandInt(seed)
 
     for i in range(nr):
@@ -79,7 +80,7 @@ if __name__ == "__main__":
             6C36D41D
     """
     parser = argparse.ArgumentParser(description="generate Ramnit domains")
-    parser.add_argument("--seed", help="seed as hex", default='E7392D18')
+    parser.add_argument("--seed", help="seed as hex", default='E706B455')
     parser.add_argument("--nr", help="nr of domains", type=int, default=3000)
     parser.add_argument("-t", "--tlds", help="list of tlds", default=None)
     args = parser.parse_args()
