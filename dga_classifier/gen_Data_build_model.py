@@ -52,8 +52,8 @@ def gen_malicious(num_per_dga=10000):
                      'passengerjet', 'delta1008', 'american765', 'united8765', 'southwest3456',
                      'albuquerque', 'sanfrancisco', 'sandiego', 'losangeles', 'newyork',
                      'atlanta', 'portland', 'seattle', 'washingtondc']
-    banjori_seeds = ['somestring',
-                     'firetruck', 'bulldozer', 'airplane', 'racecar',
+    # banjori_seeds = ['somestring',
+    #                  'firetruck', 'bulldozer', 'airplane', 'racecar',
                      # 'apartment', 'laptop', 'laptopcomp', 'malwareisbad', 'crazytrain',
                      # 'thepolice', 'fivemonkeys', 'hockey', 'football', 'baseball',
                      # 'basketball', 'trackandfield', 'fieldhockey', 'softball', 'redferrari',
@@ -64,7 +64,7 @@ def gen_malicious(num_per_dga=10000):
                      # 'passengerjet', 'delta1008', 'american765', 'united8765', 'southwest3456',
                      # 'albuquerque', 'sanfrancisco', 'sandiego', 'losangeles', 'newyork',
                      # 'atlanta', 'portland', 'seattle', 'washingtondc'
-                     ]
+                     # ]
 
     segs_size = max(1, num_per_dga/len(banjori_seeds))
     segs_size = int(segs_size)

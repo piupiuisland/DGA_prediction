@@ -51,6 +51,7 @@ if __name__ == "__main__":
     l = []
     l += generate_barzarBackdoor(d)
 
+    ## here will generate 15162 samples;
     print(len(l))
     # for domain in generate_barzarBackdoor(d):
     print(l[-10:])
