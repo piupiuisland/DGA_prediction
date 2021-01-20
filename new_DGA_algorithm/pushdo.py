@@ -100,7 +100,7 @@ def domains_for_day(r, config):
         yield(domain)
 
 
-def generate_baderj(date, config):
+def generate_pushdo(date, config):
     days = days_since_0(date)
     for j in chain(range(0, -31, -1), range(1, 70)):
         yield from domains_for_day(days + j, config)
@@ -120,6 +120,6 @@ if __name__ == "__main__":
     #     print(domain)
 
     re = []
-    re += generate_baderj(d, args.config)
+    re += generate_pushdo(d, args.config)
     print(re)
     print(len(re))
