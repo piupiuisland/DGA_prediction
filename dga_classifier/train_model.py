@@ -100,7 +100,7 @@ if __name__ == '__main__':
     X, y, DGA_char = load_data('traindata.pkl')
     print(X.shape)
     Batch_Size = 128
-    Epochs=50
+    Epochs=150
     features = len(DGA_char) + 1
     length = X.shape[1]
 
