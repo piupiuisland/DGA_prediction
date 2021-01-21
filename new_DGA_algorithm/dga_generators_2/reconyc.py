@@ -69,12 +69,12 @@ def randint(mersenne, nr):
 
 
 
-def generate_reconyc(seed) :
+def generate_reconyc(seed, n_samples) :
     re = []
     mersenne = Mersenne(seed)
     charset = "iHRYg79zJXaGw1CF5K0d3vZobhAlx6StUBnjOIMpe2yVuPr4sL8DqmQTkEcWNf"
 
-    for nr in range(3000):
+    for nr in range(n_samples):
         domain = ""
         for i in range(10):
             c = charset[randint(mersenne, len(charset))]
@@ -85,9 +85,11 @@ def generate_reconyc(seed) :
 
 
 
-if __name__ == "__main__":
-
-    seed = random.randint(0, 1000 * 3600 * 24)
-    re = generate_reconyc(seed)
-    print(re)
-    print(len(re))
+# if __name__ == "__main__":
+#
+#     seed = random.randint(0, 1000 * 3600 * 24)
+#     re = generate_reconyc(seed, n_samples=3000)
+#     print(re)
+#     print(len(re))
+#
+#

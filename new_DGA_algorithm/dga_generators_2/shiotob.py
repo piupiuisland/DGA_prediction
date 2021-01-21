@@ -55,13 +55,13 @@ def generate_shiotob(nr):
     re2 = [item.split('.')[0] for item in re]
     return re2
 
-if __name__=="__main__":
-    """ example seed domain: 4ypv1eehphg3a.com """
-    parser = argparse.ArgumentParser(description="DGA of Shiotob")
-    parser.add_argument("--domain", help="initial domain", default='iofgiuhiohj')
-    args = parser.parse_args()
-    domain = args.domain
-
-    re3 = generate_shiotob(3000)
-    print(re3)
-    print(len(re3))
+# if __name__=="__main__":
+#     """ example seed domain: 4ypv1eehphg3a.com """
+#     parser = argparse.ArgumentParser(description="DGA of Shiotob")
+#     parser.add_argument("--domain", help="initial domain", default='iofgiuhiohj')
+#     args = parser.parse_args()
+#     domain = args.domain
+#
+#     re3 = generate_shiotob(3000)
+#     print(re3)
+#     print(len(re3))

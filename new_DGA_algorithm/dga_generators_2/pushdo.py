@@ -41,7 +41,10 @@ def get_puConfig():
 
 
 def part(r, c):
-    config = configs[c]
+    #
+    # configs = get_puConfig()
+    # config = configs[c]
+    config = c
     mod = config.get("mod")
     mod2 = config.get("mod2")
     conso_a = config.get('conso_a')
@@ -115,7 +118,7 @@ def generate_pushdo(d, keys):
     configs = get_puConfig()
     push_config = configs[keys]
     domain_list = []
-    domain_list += generate_pushdo_i(d,keys)
+    domain_list += generate_pushdo_i(d,push_config)
     # print(domain_list)
     # print(len(domain_list))
     return domain_list
@@ -123,9 +126,9 @@ def generate_pushdo(d, keys):
 
 
 # if __name__ == "__main__":
-#     configs = get_puConfig()
+    # configs = get_puConfig()
 #     parser = argparse.ArgumentParser(description="gozi dga")
-#     # parser.add_argument("-c", "--config", default="kz_v1", choices=configs.keys())
+# #     # parser.add_argument("-c", "--config", default="kz_v1", choices=configs.keys())
 #     parser.add_argument("-d", "--date",
 #             help="date for which to generate domains")
 #     args = parser.parse_args()
@@ -134,8 +137,9 @@ def generate_pushdo(d, keys):
 #     else:
 #         d = datetime.now()
 #
-#
-#     # re = generate_pushdo(d, "kz_v1")
-#     re2 = generate_pushdo(d,"kz_v2")
-#     print(re2)
-#     print(len(re2))
+
+    # re = generate_pushdo(d, "kz_v1")
+    # d = datetime.now()
+    # re2 = generate_pushdo(d,"kz_v2")
+    # print(re2)
+    # print(len(re2))

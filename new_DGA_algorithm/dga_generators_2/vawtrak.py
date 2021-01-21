@@ -14,7 +14,7 @@ class Rand():
         return self.r.value
 
 
-def generate_vawtrak(r):
+def generate_vawtrak_i(r):
     length = r.rand()%5 + 7
     domain = ""
     for i in range(length):
@@ -22,15 +22,25 @@ def generate_vawtrak(r):
     # domain += ".top"
     # print(domain)
     return domain
-if __name__=="__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--seed", help="e.g. DEADBEEF", default='DEADBEEF')
-    args = parser.parse_args()
-    r = Rand(int(args.seed, 16))
 
-    re = []
-    for nr in range(3000):
-        domain = generate_vawtrak(r)
-        re.append(domain)
-    print(len(re))
-    print(re)
+
+def generate_vawtrak(seed, nr=3000):
+    r = Rand(int(seed, 16))
+    vawtrak = []
+    for nr in range(nr):
+        domain = generate_vawtrak_i(r)
+        vawtrak.append(domain)
+    return vawtrak
+
+
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("--seed", help="e.g. DEADBEEF", default='DEADBEEF')
+#     args = parser.parse_args()
+#
+#
+#     re = generate_vawtrak(seed, 4000)
+#
+#     print(len(re))
+#     print(re)
+#

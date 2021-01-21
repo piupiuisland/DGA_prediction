@@ -24,7 +24,7 @@ def dga(date):
         key_hash_b64_noeq_lc = key_hash_b64.rstrip("=").lower()
         trantab = str.maketrans("-+/", "abc")
         hostname_src = key_hash_b64_noeq_lc.translate(trantab)
-        for hostname_len in range(6, 11):
+        for hostname_len in range(6, 18):
             hostname = hostname_src[:hostname_len]
             domain = f"{hostname}.{tld}"
             yield domain

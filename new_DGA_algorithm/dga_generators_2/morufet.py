@@ -3,9 +3,10 @@ from datetime import datetime, timedelta
 import argparse
 import random
 
-def generate_morufet(date, key):
+def generate_morufet(date, key, nr=5000):
     moru_list = []
-    for index in range(1500):
+
+    for index in range(nr):
         seed = 8*[0]
         seed[0] = ((date.year & 0xFF) + 0x30) & 0xFF
         seed[1] = date.month & 0xFF
@@ -64,11 +65,15 @@ def generate_morufet(date, key):
 #         d = datetime.strptime(args.date, "%Y-%m-%d")
 #     else:
 #         d = datetime.now()
-#     # print(d, key)
+#     print(d, key)
 #
 #
 #     re_1 = generate_morufet(d, key)
-#     re_2 = generate_morufet(d, key=16)
+#     # re_2 = generate_morufet(d, D6D7A4BE)
+#     # re_3 = generate_morufet(d, 'D6D7A4B1')
 #
-#     re = re_1 + re_2
+#     # re = re_1 + re_2 + re_3
+#
+#     re = re_1
 #     print(len(re))
+#     print(len(set(re)))

@@ -20,13 +20,13 @@ def generate_fobber(version):
         c = -1719405398
         l = 17
         tld = '.net'
-        nr = 1500
+        nr = 3500
     elif version == 2:
         r = 0x851A3E59
         c = -1916503263
         l = 10
         tld = '.com'
-        nr = 1500
+        nr = 3500
     for _ in range(nr):
         # print(_)
         r , domain= next_domain(r, c, l, tld)

@@ -43,7 +43,7 @@ def generate_gozi(date, wordlist):
     r = Rand(seed)
 
     for j in range(150):
-        for i in range(20):
+        for i in range(50):
             r.rand()
             v = r.rand()
             length = v % 12 + 12

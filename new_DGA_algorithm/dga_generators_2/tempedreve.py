@@ -16,7 +16,7 @@ def shuffle(letters, seed):
         letters[j], letters[i] = letters[i], letters[j]
     return letters
 
-def generate_tempedreve(d):
+def generate_tempedreve_i(d):
     enddate = datetime.strptime("2021-01-11", "%Y-%m-%d")
     while d >= enddate:
         days = days_since_unix_epoch(d)
@@ -39,27 +39,27 @@ def generate_tempedreve(d):
 def days_since_unix_epoch(dt):
     return (dt - datetime(1970,1,1)).days
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="date for which to generate domains")
-    args = parser.parse_args()
-    if args.date:
-        d = datetime.strptime(args.date, "%Y-%m-%d")
-    else:
-        d = datetime.now()
-    # print(d)
-
-    days = 300
-    base = datetime.today()
-    date_list = [base - timedelta(days=x) for x in range(days)]
-    print(len(date_list))
-    re = []
-    for d in date_list:
-        print(d)
-        for domain in generate_tempedreve(d):
-            # re += domain
-            re.append(domain)
-            # print(domain)
-
-    print(re)
-    print(len(re))
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="date for which to generate domains")
+#     args = parser.parse_args()
+#     if args.date:
+#         d = datetime.strptime(args.date, "%Y-%m-%d")
+#     else:
+#         d = datetime.now()
+#     # print(d)
+#
+#     days = 300
+#     base = datetime.today()
+#     date_list = [base - timedelta(days=x) for x in range(days)]
+#     # print(len(date_list))
+#     re = []
+#     for d in date_list:
+#         # print(d)
+#         for domain in generate_tempedreve_i(d):
+#             # re += domain
+#             re.append(domain)
+#             # print(domain)
+#
+#     print(re)
+#     print(len(re))

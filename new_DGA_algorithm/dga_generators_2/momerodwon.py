@@ -25,7 +25,7 @@ def generate_momerodwon(date, back=0):
     days_since_epoch = (date - epoch).days
     days = days_since_epoch
     for j in range(back+1):
-        for nr in range(500):
+        for nr in range(1300):
             for tld in tlds:
                 seed = "{}-{}-{}".format(magic, days, nr)
                 m = hashlib.md5(seed.encode('ascii')).hexdigest()

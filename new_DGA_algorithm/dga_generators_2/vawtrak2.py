@@ -13,6 +13,7 @@ def prng(r):
 def generate_vawtrak2(seed, nr_domains):
     consonants = "cdfghlmnrstw"
     vowels = "aeiou"
+    seed  = int(seed, 16)
     r = c_int(seed)
     re = []
     for n in range(nr_domains):
@@ -40,16 +41,19 @@ def generate_vawtrak2(seed, nr_domains):
         re.append(domain)
     return re
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--seed", choices = {'0x5542b2', '0x5884c3c4'},
-            default=0x5884c3c4, help="seed value")
-    parser.add_argument("-n", "--nr", help="nr of domains", default=3000, type=int)
-    args = parser.parse_args()
-    if type(args.seed) == str:
-        seed = int(args.seed, 16)
-    else:
-        seed = args.seed
-    re = generate_vawtrak2(seed, args.nr)
-    print(re)
-    print(len(set(re)))
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-s", "--seed", choices = {'0x5542b2', '0x5884c3c4'},
+#             default=0x5884c3c4, help="seed value")
+#     parser.add_argument("-n", "--nr", help="nr of domains", default=3000, type=int)
+#     args = parser.parse_args()
+#     if type(args.seed) == str:
+#         seed = int(args.seed, 16)
+#     else:
+#         seed = args.seed
+#     print('seed',seed)
+#     re = generate_vawtrak2('0x5884c3c4', args.nr)
+#     print(re)
+#     print(len(set(re)))
+#
+#

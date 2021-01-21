@@ -12,7 +12,7 @@ def generate_chinad(date):
     """
 
     ## here 0x1000 will generate 4096 samples;
-    for nr in range(0x1000):
+    for nr in range(0x2000):
         data = "{}{}{}{}".format(
                 chr(date.year % 100),
                 chr(date.month),

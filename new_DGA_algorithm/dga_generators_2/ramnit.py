@@ -24,7 +24,8 @@ def generate_ramnit(seed, nr, tlds):
                  'D2B3C361', 'F318D47D', '231D9480', '13317EAC', '89547381', '6C36D41D',
                  ]
     idx = random.randint(0,len(seed_list))
-    print(seed)
+    # print(seed)
+    seed = int(seed, 16)
     r = RandInt(seed)
 
     for i in range(nr):
@@ -44,19 +45,19 @@ def generate_ramnit(seed, nr, tlds):
         yield domain
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="generate Ramnit domains")
-    parser.add_argument("--seed", help="seed as hex", default='E706B455')
-    parser.add_argument("--nr", help="nr of domains", type=int, default=3000)
-    parser.add_argument("-t", "--tlds", help="list of tlds", default=None)
-    args = parser.parse_args()
-    tlds = None
-    if args.tlds:
-        tlds = [x.strip() for x in args.tlds.split(" ")]
-    # for domain in generate_ramnit(int(args.seed, 16), args.nr, tlds):
-    #     print(domain)
-
-    re = []
-    re += generate_ramnit(int(args.seed, 16), args.nr, tlds)
-    print(re)
-    print(len(re))
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description="generate Ramnit domains")
+#     parser.add_argument("--seed", help="seed as hex", default='E706B455')
+#     parser.add_argument("--nr", help="nr of domains", type=int, default=3000)
+#     parser.add_argument("-t", "--tlds", help="list of tlds", default=None)
+#     args = parser.parse_args()
+#     tlds = None
+#     if args.tlds:
+#         tlds = [x.strip() for x in args.tlds.split(" ")]
+#     # for domain in generate_ramnit(int(args.seed, 16), args.nr, tlds):
+#     #     print(domain)
+#
+#     re = []
+#     re += generate_ramnit('E706B455', 3000, None)
+#     print(re)
+#     print(len(re))

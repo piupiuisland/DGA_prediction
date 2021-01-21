@@ -42,7 +42,7 @@ class RC4:
         return r
 
 
-def seeding(d, key):
+def seeding(d, key="q23Cud3xsNf3"):
     rc4 = RC4(key)
     d = d.replace(hour=0, minute=0, second=0)
     timestamp = int((d - datetime(1970, 1, 1)).total_seconds())
@@ -66,21 +66,21 @@ def generate_zloader(seed, nr_of_domains):
         re.append(domain)
     return re
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="date when domains are generated")
-    parser.add_argument("-r", "--rc4",
-            help="rc4 key from config",
-            choices=["q23Cud3xsNf3","41997b4a729e1a0175208305170752dd", "kZieCw23gffpe43Sd",  "Ts72YjsjO5TghE6m"],
-            default="q23Cud3xsNf3")
-
-
-    args = parser.parse_args()
-    if args.date:
-        d = datetime.strptime(args.date, "%Y-%m-%d")
-    else:
-        d = datetime.now()
-    seed = seeding(d, args.rc4)
-    re = generate_zloader(seed, 3000)
-    print(re)
-    print(len(re))
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="date when domains are generated")
+#     parser.add_argument("-r", "--rc4",
+#             help="rc4 key from config",
+#             choices=["q23Cud3xsNf3","41997b4a729e1a0175208305170752dd", "kZieCw23gffpe43Sd",  "Ts72YjsjO5TghE6m"],
+#             default="q23Cud3xsNf3")
+#
+#
+#     args = parser.parse_args()
+#     if args.date:
+#         d = datetime.strptime(args.date, "%Y-%m-%d")
+#     else:
+#         d = datetime.now()
+#     seed = seeding(d, "q23Cud3xsNf3")
+#     re = generate_zloader(seed, 3000)
+#     print(re)
+#     print(len(re))
