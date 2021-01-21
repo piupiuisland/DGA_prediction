@@ -60,6 +60,7 @@ def load_data(data_file, valid_char_dict= None):
     if valid_char_dict == None:
         # Generate a dictionary of valid characters
         valid_char_dict = {x: idx + 1 for idx, x in enumerate(set(''.join(X)))}
+        pickle.dump(valid_char_dict, open('valid_char_dict.pkl', 'wb'))
 
     max_features = len(valid_char_dict) + 1
     maxlen = np.max([len(x) for x in X])
