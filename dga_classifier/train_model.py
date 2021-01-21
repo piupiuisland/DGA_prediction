@@ -9,7 +9,7 @@ from tensorflow.python.keras import callbacks as tf_cb
 from tensorflow.python.keras.preprocessing import sequence
 import os
 
-def build_model(max_features, maxlen):
+def build_model(max_features, maxlen=70):
     """Build LSTM model"""
     model = Sequential()
     model.add(Embedding(max_features, 128, input_length=maxlen))
@@ -63,10 +63,13 @@ def load_data(data_file):
     max_features = len(valid_char_dict) + 1
     maxlen = np.max([len(x) for x in X])
 
-    print('maxlen:', maxlen)
-    # Convert characters to int and pad
+    if maxlen <= 70:
+        maxleng = 70
+    else:
+        maxleng = maxlen
+    # maxleng characters to int and pad
     X = [[valid_char_dict[y] for y in x] for x in X]
-    X = sequence.pad_sequences(X, maxlen=maxlen)
+    X = sequence.pad_sequences(X, maxlen=maxleng)
 
     # Convert labels to 0-1
     y = [0 if x == 'benign' else 1 for x in labels]
@@ -97,7 +100,7 @@ if __name__ == '__main__':
         tf.config.experimental.set_memory_growth(gpu, True)
 
 
-    X, y, DGA_char = load_data('traindata.pkl')
+    X, y, DGA_char = load_data('traindata2.pkl')
     print(X.shape)
     Batch_Size = 128
     Epochs=150

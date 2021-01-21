@@ -210,7 +210,7 @@ def get_data(d,nr,DATA_FILE='saved_data2.pkl'):
     labels = malig_label + benig_label
     shuffle_in_union(domains,labels)
 
-    data_and_label = list(zip(domains, labels))
+    data_and_label = list(zip(labels,domains))
     print('saving data :)')
     pickle.dump(data_and_label, open(DATA_FILE, 'wb'))
     return domains, labels
