@@ -51,14 +51,15 @@ def callb(path_checkpoint):
     ]
     return callBacks
 
-def load_data(data_file):
+def load_data(data_file, valid_char_dict= None):
     indata = pickle.load(open(data_file, 'rb'))
     print('DGA load successfully')
     X = [x[1] for x in indata]
     labels = [x[0] for x in indata]
 
-    # Generate a dictionary of valid characters
-    valid_char_dict = {x: idx + 1 for idx, x in enumerate(set(''.join(X)))}
+    if valid_char_dict == None:
+        # Generate a dictionary of valid characters
+        valid_char_dict = {x: idx + 1 for idx, x in enumerate(set(''.join(X)))}
 
     max_features = len(valid_char_dict) + 1
     maxlen = np.max([len(x) for x in X])
@@ -100,7 +101,14 @@ if __name__ == '__main__':
         tf.config.experimental.set_memory_growth(gpu, True)
 
 
-    X, y, DGA_char = load_data('traindata2.pkl')
+
+    X2, y2, DGA_char2 = load_data('traindata2.pkl')
+    X1, y1, DGA_char1 = load_data('traindata.pkl', valid_char_dict=DGA_char2)
+
+    X = np.concatenate([X1,X2],axis=0)
+    y = y1 + y2
+    DGA_char = DGA_char2
+
     print(X.shape)
     Batch_Size = 128
     Epochs=150
