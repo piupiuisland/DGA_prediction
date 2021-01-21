@@ -58,19 +58,20 @@ def generate_nymaim(date, nr):
         # print(domain)
     return nymain
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="as YYYY-MM-DD")
-    parser.add_argument("-n", "--nr", help="nr of domains", type=int, default=3000)
-
-    # args = parser.parse_args(date = None, nr=2000)
-    args = parser.parse_args()
-    date_str = args.date
-    if date_str:
-        date = datetime.strptime(date_str, "%Y-%m-%d")
-    else:
-        date = datetime.now()
-
-    re = generate_nymaim(date, args.nr)
-    # print(re)
-    # print(len(re))
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="as YYYY-MM-DD")
+#     parser.add_argument("-n", "--nr", help="nr of domains", type=int, default=3000)
+#
+#     # args = parser.parse_args(date = None, nr=2000)
+#     args = parser.parse_args()
+#     date_str = args.date
+#     if date_str:
+#         date = datetime.strptime(date_str, "%Y-%m-%d")
+#     else:
+#         date = datetime.now()
+#
+#     re = generate_nymaim(date, args.nr)
+#     print(re)
+#     print(len(re))
+#     print(len(set(re)))

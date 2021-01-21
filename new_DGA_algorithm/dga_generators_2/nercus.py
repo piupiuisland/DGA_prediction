@@ -37,20 +37,25 @@ def generate_necurs_domain(sequence_nr, magic_nr, date):
 
     return domain
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="as YYYY-mm-dd")
-    args = parser.parse_args()
-    date_str = args.date
-    if date_str:
-        date = datetime.strptime(date_str, "%Y-%m-%d")
-    else:
-        date = datetime.now()
-
+def generate_nercus(num):
     re = []
-    for sequence_nr in range(3000):
+    date = datetime.now()
+    for sequence_nr in range(num):
         # print(generate_necurs_domain(sequence_nr, 9, date))
         re.append(generate_necurs_domain(sequence_nr, 9, date))
+    return re
 
-    print(len(re))
-    print(re)
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="as YYYY-mm-dd")
+#     args = parser.parse_args()
+#     date_str = args.date
+#     if date_str:
+#         date = datetime.strptime(date_str, "%Y-%m-%d")
+#     else:
+#         date = datetime.now()
+#
+#
+#     re = generate_nercus(3000)
+#     print(len(set(re)))
+#     print(re)

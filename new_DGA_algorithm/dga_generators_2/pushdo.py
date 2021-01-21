@@ -5,35 +5,39 @@ from datetime import datetime
 from itertools import chain
 
 
-configs = {
-    "kz_v1": {
-        "conso_a": "bcdfghjklmnpqrstvwx",
-        "conso_b": "zxtsrqpnmlkgfdc",
-        "vowels_a": "aeiou",
-        "vowels_b": "aio",
-        "mod": 7,
-        "mod2": 1,
-        "tld": "kz"
-    },
-    "com_v1": {
-        "conso_a": "bcdfghjklmnpqrstvwx",
-        "conso_b": "zxtsrqpnmlkgfdc",
-        "vowels_a": "aeiou",
-        "vowels_b": "aio",
-        "mod": 7,
-        "mod2": 1,
-        "tld": "com"
-    },
-    "kz_v2": {
-        "conso_a": "kqbhcndjfwglpmzxrsv",
-        "conso_b": "qzlbtgrnkxsfdcm",
-        "vowels_a": "aeiou",
-        "vowels_b": "aio",
-        "mod": 8,
-        "mod2": 2,
-        "tld": "kz"
+
+
+def get_puConfig():
+    configs = {
+        "kz_v1": {
+            "conso_a": "bcdfghjklmnpqrstvwx",
+            "conso_b": "zxtsrqpnmlkgfdc",
+            "vowels_a": "aeiou",
+            "vowels_b": "aio",
+            "mod": 7,
+            "mod2": 1,
+            "tld": "kz"
+        },
+        "com_v1": {
+            "conso_a": "bcdfghjklmnpqrstvwx",
+            "conso_b": "zxtsrqpnmlkgfdc",
+            "vowels_a": "aeiou",
+            "vowels_b": "aio",
+            "mod": 7,
+            "mod2": 1,
+            "tld": "com"
+        },
+        "kz_v2": {
+            "conso_a": "kqbhcndjfwglpmzxrsv",
+            "conso_b": "qzlbtgrnkxsfdcm",
+            "vowels_a": "aeiou",
+            "vowels_b": "aio",
+            "mod": 8,
+            "mod2": 2,
+            "tld": "kz"
+        }
     }
-}
+    return configs
 
 
 def part(r, c):
@@ -100,26 +104,38 @@ def domains_for_day(r, config):
         yield(domain)
 
 
-def generate_pushdo(date, config):
+
+def generate_pushdo_i(date, config):
     days = days_since_0(date)
-    for j in chain(range(0, -31, -1), range(1, 70)):
+    for j in chain(range(0, -31, -1), range(1, 50)):
         yield from domains_for_day(days + j, config)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="gozi dga")
-    parser.add_argument("-c", "--config", default="kz_v1", choices=configs.keys())
-    parser.add_argument("-d", "--date",
-            help="date for which to generate domains")
-    args = parser.parse_args()
-    if args.date:
-        d = datetime.strptime(args.date, "%Y-%m-%d")
-    else:
-        d = datetime.now()
-    # for domain in generate_baderj(d, args.config):
-    #     print(domain)
+def generate_pushdo(d, keys):
+    configs = get_puConfig()
+    push_config = configs[keys]
+    domain_list = []
+    domain_list += generate_pushdo_i(d,keys)
+    # print(domain_list)
+    # print(len(domain_list))
+    return domain_list
 
-    re = []
-    re += generate_pushdo(d, args.config)
-    print(re)
-    print(len(re))
+
+
+# if __name__ == "__main__":
+#     configs = get_puConfig()
+#     parser = argparse.ArgumentParser(description="gozi dga")
+#     # parser.add_argument("-c", "--config", default="kz_v1", choices=configs.keys())
+#     parser.add_argument("-d", "--date",
+#             help="date for which to generate domains")
+#     args = parser.parse_args()
+#     if args.date:
+#         d = datetime.strptime(args.date, "%Y-%m-%d")
+#     else:
+#         d = datetime.now()
+#
+#
+#     # re = generate_pushdo(d, "kz_v1")
+#     re2 = generate_pushdo(d,"kz_v2")
+#     print(re2)
+#     print(len(re2))

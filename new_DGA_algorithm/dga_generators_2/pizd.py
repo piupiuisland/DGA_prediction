@@ -3,7 +3,7 @@ from datetime import datetime
 import numpy as np
 
 
-def pizd(time, nb):
+def generate_pizd(time, nb):
     """
     Generates nb domains name according to pizd DGA
     :param time: Beginning of the 8' 35" long time interval
@@ -395,6 +395,8 @@ def pizd(time, nb):
                 'written',
                 'yellow']
     domains = []
+    time -= datetime.utcfromtimestamp(0)
+    time = int(time.total_seconds() * 1000)
     for i in range(0, nb):
         domains.append(generate_domain(bin(time + i), wordlist))
     return domains
@@ -418,19 +420,21 @@ def generate_domain(timestamp, wordl):
 
     return ''.join([str(wds) for wds in res])
 
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--date", help="date for which to generate domains")
-    parser.add_argument("-n", "--nr", help="nr of domains to generate (default 85)",
-                        type=int, default=3000)
-    args = parser.parse_args()
-
-    d = datetime.strptime(args.date, "%Y-%m-%d") if args.date else datetime.now()
-    d -= datetime.utcfromtimestamp(0)
-    # for domain in pizd(int(d.total_seconds() * 1000), args.nr):
-    #     print(domain)
-
-    re = pizd(int(d.total_seconds() * 1000), args.nr)
-    print(re)
-    print(len(re))
+#
+# if __name__ == '__main__':
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("-d", "--date", help="date for which to generate domains")
+#     parser.add_argument("-n", "--nr", help="nr of domains to generate (default 85)",
+#                         type=int, default=3000)
+#     args = parser.parse_args()
+#
+#     d = datetime.strptime(args.date, "%Y-%m-%d") if args.date else datetime.now()
+#     # d -= datetime.utcfromtimestamp(0)
+#     # for domain in pizd(int(d.total_seconds() * 1000), args.nr):
+#     #     print(domain)
+#
+#     # re = generate_pizd(int(d.total_seconds() * 1000), args.nr)
+#     re = generate_pizd(d, args.nr)
+#     print(re)
+#     print(len(re))
+#
