@@ -61,7 +61,7 @@ def load_data(data_file, valid_char_dict= None):
         # Generate a dictionary of valid characters
         valid_char_dict = {x: idx + 1 for idx, x in enumerate(set(''.join(X)))}
         pickle.dump(valid_char_dict, open('valid_char_dict.pkl', 'wb'))
-        print('valid_char_dict',valid_char_dict)
+
 
     valid_char_dict = {'b': 1, '0': 2, 'w': 3, 'e': 4, 'j': 5, '9': 6, 'a': 7, '2': 8,
                        'f': 9, '7': 10, 't': 11, 'g': 12, 'z': 13, 'p': 14, 'c': 15,
@@ -69,7 +69,7 @@ def load_data(data_file, valid_char_dict= None):
                        'l': 23, 'v': 24, 'r': 25, '5': 26, '-': 27, '3': 28, 'k': 29,
                        'u': 30, 'o': 31, '4': 32, 'n': 33, 'i': 34, 'h': 35, 'd': 36,
                        '_': 37, 'y': 38}
-
+    print('valid_char_dict', valid_char_dict)
     max_features = len(valid_char_dict) + 1
     maxlen = np.max([len(x) for x in X])
 
