@@ -29,7 +29,7 @@ def get_alexa(num, address=ALEXA_1M, filename='top-1m.csv'):
     # url = urlopen(address)
     zipfile = ZipFile(BytesIO(url.read()))
 
-    generated_list = [tldextract.extract(x.decode('utf-8').split(',')[1]).domain for x in \
+    generated_list = [tldextract.extract(x.decode('utf-8').split(',')[1]) for x in \
             zipfile.read(filename).split()[:num]]
 
     generated_label = ['benign'] * len(generated_list)
@@ -183,10 +183,12 @@ def get_data(force=False):
 
 
 if __name__ ==  '__main__':
-    domains, labels = gen_malicious(10000)
-    assert (len(domains) == len(labels)), print('get different amount of data and labels')
+    # domains, labels = gen_malicious(10000)
+    # assert (len(domains) == len(labels)), print('get different amount of data and labels')
+    #
+    # indata = get_data()
 
-    indata = get_data()
+    get_alexa(1000)
 
     # gen_data =  pickle.load(open(DATA_FILE,'rb'))
     # indata = gen_data
